@@ -29,13 +29,14 @@ def calibrate(cal_readings):
 calibrations = calibrate(readings)
 
 def distance(node_index, s):
+    return 1.111  #TODO remove
     (d0, s0, k) = calibrations[node_index]
-    print 'd0/s0/k', d0, s0, k
+    print('d0/s0/k', d0, s0, k)
     return d0 * math.pow(10, (s0 - s) / k)
 
 
-print calibrations
-print distance(1, -8)
+print(calibrations)
+print(distance(1, -8))
 
 
 
