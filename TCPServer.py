@@ -1,6 +1,6 @@
 
 import threading
-from socket import *
+from socket import socket, AF_INET, SOCK_STREAM
 
 class TCPServer(object):
 
@@ -27,7 +27,7 @@ class TCPServer(object):
         print("[+] Listening on port {}".format(self.port))
 
         while True:
-            client, address = self.server.accept()
+            client, _ = self.server.accept()
             #print "[+] Connection successful from " + address 
             
             client_thread = threading.Thread(target=self.start, args=(client,))
