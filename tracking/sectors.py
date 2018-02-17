@@ -5,11 +5,14 @@ distances_1 = [10, None, None, None, None, None,]
 
 #node1, node2, combined_distance limit
 all_edge_sectors = [
-    [1, 2, 50]
+    #[1, 2, 50]
 ]
 all_node_sectors = [
-    [1, 15],
-    [2, 15]
+    [0, 50],
+    [1, 50],
+    [2, 50],
+    [3, 50],
+    [4, 50]
 ]
 
 
@@ -34,31 +37,21 @@ def in_sectors(distances, node_secs, edge_secs):
             return True
     return False
 
-# print(in_sectors([None, None, 20, None, None, None], node_sectors, edge_sectors))
+def find_sector(distances, node_secs, edge_secs):
+    for sec in node_secs:
+        if in_node_sector(distances, sec):
+            return sec[0]
+    for sec in edge_secs:
+        if in_edge_sector(distances, sec):
+            return None  #TODO return both
+    return None
+
+#
 
 ######## Path to sectors
 
-def select_node_sectors(node_secs, path):
-    selected_secs = []
-    for sec in node_secs:
-        if sec[0] in path:
-            selected_secs.append(sec)
-    return selected_secs
-
-def select_edge_sectors(edge_secs, path):
-    selected_secs = []
-    for sec in edge_secs:
-        if (sec[0] in path) and (sec[1] in path):
-            selected_secs.append(sec)
-    return selected_secs
 
 
-path = [1, 2]
 
-path_node_sectors = select_node_sectors(all_node_sectors, path)
-path_edge_sectors = select_edge_sectors(all_edge_sectors, path)
-
-def in_path(distances):
-    return in_sectors(distances, path_node_sectors, path_edge_sectors)
-
-print(in_path([None, 20, 20, None, None, None]))
+if __name__ == "__main__":
+    print(in_sectors([None, None, 20, None, None, None], all_node_sectors, all_edge_sectors))

@@ -17,13 +17,13 @@ def main():
     node2.connect('localhost', 8000)
 
     while True:
-        node0.send(STAT_GOOD, -20.5)
+        node0.send(STAT_OFF, 50)
         time.sleep(1)
 
         node1.send(STAT_OFF, 50)
         time.sleep(1)
 
-        node2.send(STAT_OFF, 50)
+        node2.send(STAT_GOOD, -20.5)
         time.sleep(1)
 
 
