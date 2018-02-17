@@ -1,5 +1,6 @@
 
 import threading
+import random
 from socket import socket, AF_INET, SOCK_STREAM
 
 class TCPServer(object):
@@ -17,7 +18,6 @@ class TCPServer(object):
         self.server.bind((self.host, self.port))
 
         connection_thread = threading.Thread(target=self.connect)
-        connection_thread.setDaemon(True)
         connection_thread.start()
 
         connection_thread.join()
@@ -27,8 +27,8 @@ class TCPServer(object):
         print("[+] Listening on port {}".format(self.port))
 
         while True:
-            client, _ = self.server.accept()
-            #print "[+] Connection successful from " + address 
+            client, address = self.server.accept()
+            print("[+] Connection successful from {0}".format(address)) 
             
             client_thread = threading.Thread(target=self.start, args=(client,))
             client_thread.start()
@@ -44,8 +44,8 @@ class TCPServer(object):
             self.on_arm[int(data_list[0])] = int(data_list[1])
             self.rssi[int(data_list[0])] = int(data_list[2])
 
-            print(self.on_arm) 
-            print(self.rssi)
+            # Sends an alert randomly for now
+            client.send(str(random.choice([0, 1])).encode())
 
     def close(self):
         self.server.close()
