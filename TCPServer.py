@@ -29,5 +29,16 @@ class TCPServer(object):
             
             client_thread = threading.Thread(target=self.start, args=(client,))
 
+    def start(self, client):
+        while True:
+            data = client.recv(4096)
+            if not data:
+                break
+
+            data_list = data.split(' ')
+
+            on_arm[data_list[0]] = data_list[1]
+            rssi[data_list[0]] = data_list[2]
+
     def close(self):
         self.server.close()
