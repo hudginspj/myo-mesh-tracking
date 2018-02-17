@@ -15,5 +15,6 @@ class TCPNode(object):
     def send(self, node_id, connected, rssi):
         self.sock.send("%s %s %s" % (node_id, connected, rssi))
 
-    def close(self)
+    def close(self):
         self.sock.close()
+
