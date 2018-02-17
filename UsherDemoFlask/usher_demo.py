@@ -3,6 +3,7 @@ import requests
 import json
 import random
 import base64
+from tracking.Tracker import *
 
 import TCPServer
 
@@ -16,17 +17,17 @@ clientId = "13"
 orgId = "Paul"
 session = requests.session()
 
-# mesh_server = TCPServer.TCPServer('localhost', 8001)
+mesh_server = TCPServer.TCPServer('localhost', 8000)
 
 
 @app.route('/updateMesh')
 def updateMesh():
-    statuses = ['good', 'offline', 'out', 'removed']
-    status = statuses[random.randint(0,2)]
-    sector = random.randint(0,4)
-    # rssis = mesh_server.rssi
-    # print("Rssis for update", rssis)
-    resp = {'sector': sector, 'status': status}#, 'rssis': rssis}
+    # status = STATUSES[random.randint(0,2)]
+
+    resp = {
+        'sector': mesh_server.tracker.sector,
+        'status': STATUSES[mesh_server.tracker.status]
+    }#, 'rssis': rssis}
     return json.dumps(resp)
 
 @app.route('/monitor')
