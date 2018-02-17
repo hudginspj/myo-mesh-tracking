@@ -1,16 +1,37 @@
 from flask import Flask,render_template,request
 import requests
 import json
+import random
 import base64
 
+import TCPServer
+
 app = Flask(__name__)
+
+
 
 #domain = "env-66916.customer.cloud.microstrategy.com:2443"
 domain = "env-72355.customer.cloud.microstrategy.com:2443"
 clientId = "13"
-orgId = "2"
+orgId = "Paul"
 session = requests.session()
 
+# mesh_server = TCPServer.TCPServer('localhost', 8001)
+
+
+@app.route('/updateMesh')
+def updateMesh():
+    statuses = ['good', 'offline', 'out', 'removed']
+    status = statuses[random.randint(0,2)]
+    sector = random.randint(0,4)
+    # rssis = mesh_server.rssi
+    # print("Rssis for update", rssis)
+    resp = {'sector': sector, 'status': status}#, 'rssis': rssis}
+    return json.dumps(resp)
+
+@app.route('/monitor')
+def monitor():
+    return render_template('monitor.html')
 
 @app.route('/')
 def welcome():
