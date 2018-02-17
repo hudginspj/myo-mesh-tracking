@@ -2,16 +2,18 @@
 import time
 import socket
 
-def main(HOST, PORT):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((HOST, PORT))
+class TCPNode(object):
 
-    while True:
-        sock.sendall("[!!!] RSSI Data will go here")
-        time.sleep(0.1)
+    def __init__(self, node_id):
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.node_id = node_id
 
-    sock.close()
+    def connect(self, host, port):
+        self.sock.connect((host, port))
 
+        while True:
+            sock.send("%s" % (self.node_id))
+            time.sleep(0.1)
 
-if __name__ == '__main__':
-    main('locahost', 8000)
+    def close(self)
+        self.sock.close()
