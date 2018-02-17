@@ -2,6 +2,7 @@
 import time
 import socket
 
+
 class TCPNode(object):
 
     def __init__(self):
