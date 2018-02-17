@@ -6,10 +6,8 @@
 	
 	*
 	{
-		color: #FFF;
-		font-size: 14px;
-		margin: 0 auto;
-		text-align: center;
+		color: #000;
+		font-size: 24px;
 	}
 	
 	a
@@ -20,17 +18,55 @@
 	
 	body
 	{
-		background-color: #333;
+		background-color: #FFF;
 		font-family: Helvetica, Arial, sans-serif;
 		padding: 0;
 	}
 	
 	h1
 	{
-		font-size: 24px;
+		font-size: 30px;
 		margin: 20px 0;
 	}
+
+	table 
+	{
+		padding-left: 25px;
+		padding-right: 25px;
+	}
+
+	td 
+	{
+		padding-left: 25px;
+		padding-right: 25px;
+		text-align: center;
+	}
+
+	#two, #three, #four 
+	{
+		background-color: aquamarine;
+	}
+
+	offline 
+	{
+		background-color: red;
+	}
+
+	removed
+	{
+		background-color: red;
+	}
 	
+	out 
+	{
+		background-color: yellow;
+	}
+
+	good 
+	{
+		background-color: aquamarine;
+	}
+
 	img
 	{
 		max-height: 100%;
@@ -64,8 +100,8 @@
 	
 	#code-field
 	{
-		background-color: #333;
-	    border: 2px solid #BBB;
+		background-color: #FFF;
+	    border: 2px solid #FFF;
 	    color: #FFF;
 	    font-size: 32px;
 	    line-height: 65px;
@@ -88,7 +124,7 @@
 	
 	.btn, .key
 	{
-		border: 1px solid #DDD;
+		border: 1px solid #FFF;
 		color: #000;
 		font-size: 22px;
 		line-height: 45px;
@@ -97,7 +133,7 @@
 	
 	.btn
 	{
-		background-color: #BBB;
+		background-color: #FFF;
 	}
 	
 	.key
@@ -157,5 +193,4 @@
 		padding-left: 10px;
 		text-align: left;
 	}
-
 }
