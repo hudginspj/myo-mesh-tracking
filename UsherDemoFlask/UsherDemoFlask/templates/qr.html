@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Usher REST API | QR Code</title>
+
+<!-- jQuery script for easy DOM and JSON manipulation -->
+<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<!-- Style sheet -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" media="screen" />
+
+<script type="text/javascript">
+	var qrFrequency = 3;	// Frequency of polling
+	var qrChecking = false;	// Flag whether validation request is in progress
+	var qrInterval;			// Loop for QR Code validation
+	var qrExpires;			// Expiration time of QR Code
+	
+	// Request a new QR Code session
+	function requestQrCode()
+	{
+		$.ajax(
+		{
+			url: "/genQRcode",
+			dataType: "json",
+			type: 'POST'
+		})
+		.done(function(data)
+		{
+			if(data != null && data.code != null)
+			{
+				// Display the QR Code image
+				$('#qr-image').attr('src', 'data:image/png;base64,' + data.code);
+				
+				// Set the expiration for 5 minutes from now
+				var dateTmp = new Date();
+				qrExpires = dateTmp.getTime() + 300000;
+				
+				// Initialize the polling loop with a frequency in seconds
+				qrInterval = setInterval(checkQrSession, (qrFrequency * 1000));
+			}
+			else
+			{
+				removeQrCode();
+			}
+		})
+		.fail(function()
+		{
+			removeQrCode();
+		});
+	}
+	
+	// Check whether the QR Code has been scanned
+	function checkQrSession()
+	{
+		// Don't send a request if one is already in progress
+		if(qrChecking)
+		{
+			return;
+		}
+		
+		// Remove the QR Code if the duration has expired
+		var date = new Date();
+		if(date.getTime() > qrExpires)
+		{
+			clearInterval(qrInterval);
+			removeQrCode();
+			
+			return;
+		}
+		
+		qrChecking = true; // Raise the flag for request in progress
+		
+		$.ajax(
+		{
+			url: "/ssowait",
+			dataType: "json"
+		})
+		.done(function(data)
+		{
+			if(data != null && data.subject != null)
+			{
+				clearInterval(qrInterval);
+				
+				$('#msg-container').html('QR Code validated.');
+				
+				// Update the badge display fields with the user's info
+				loadPhoto();
+				$('#user-name').html(data.name);
+				$('#user-title').html(data.title);
+				$('#network-name').html(data.organizationName);
+
+				// Hide the keypad and show the badge display
+				$('#out-container').show();
+				$('#in-container').hide();
+			}
+		})
+		.fail(function()
+		{
+			clearInterval(qrInterval);
+			removeQrCode();
+		})
+		.always(function()
+		{
+			qrChecking = false; // Lower the flag for request in progress
+		});
+	}
+	
+	// Replace the QR Code with a refresh prompt
+	function removeQrCode()
+	{
+		$('#qr-image').attr('src', '{{ url_for('static', filename='img/image_refresh.png') }}');
+		$('#qr-image').css('cursor', 'pointer');
+		$('#qr-image').bind('click', refreshQrCode);
+	}
+	
+	// Restart the QR Code validation
+	function refreshQrCode()
+	{
+		$('#qr-image').attr('src', '{{ url_for('static', filename='img/loading_qrcode2.gif') }}');
+		$('#qr-image').css('cursor', 'default');
+		$('#qr-image').unbind('click', refreshQrCode);
+		
+		requestQrCode();
+	}
+	
+	// Retrieve the badge photo
+	function loadPhoto()
+	{
+		$.ajax(
+		{
+			url: "/badgeImage",
+			dataType: "text"
+		})
+		.done(function(data)
+		{
+			// Show the photo
+			if(data != null)
+			{
+				$('#user-photo').attr('src', 'data:image/png;base64,' + data);
+			}
+		});
+	}
+	
+	// Start the QR Code session when the page is ready
+	$(document).ready(function()
+	{
+		$('#out-container').hide();
+		
+		requestQrCode();
+	});
+</script>
+
+</head>
+
+<body>
+	<div id="main">
+		<div id="out-container">
+			<div id="photo-container">
+				<img id="user-photo" src="{{ url_for('static', filename='img/default_badge.jpg') }}" />
+			</div>
+			<div id="user-name" class="badge-text">John Doe</div>
+			<div id="user-title" class="badge-text">Employee</div>
+			<div id="network-name" class="badge-text">VandyHacks</div>
+		</div>
+		
+		<div id="in-container">
+			<div id="msg-container">Scan the QR Code with your Usher Badge.</div>
+			<div id="qr-container">
+				<img id="qr-image" src="{{ url_for('static', filename='img/loading_qrcode2.gif') }}" style="height:250px; width:250px;">
+			</div>
+		</div>
+		
+		<p><a href="index">Back to home page</a></p>
+		
+		<div id="footer">
+			<img src="{{ url_for('static', filename='img/usher_by_microstrategy.png') }}" />
+		</div>
+	</div>
+</body>
+
+</html>
+
