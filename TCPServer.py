@@ -1,30 +1,51 @@
 
 import threading
-import socket
+from socket import socket, AF_INET, SOCK_STREAM
 
-def client_handler(client):
-    while True:
-        data = client.recv(1024)
+class TCPServer(object):
 
-        if not data:
-            break
+    def __init__(self, host='localhost', port=8000):
 
-        print "[+] data: %s" % data 
+        print("[+] Initializing Communication")
 
-def main(HOST, PORT):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind((HOST, PORT))
+        self.on_arm = [0, 0, 0, 0, 0]
+        self.rssi = [0, 0, 0, 0, 0]
+        self.host = host
+        self.port = port
 
-    sock.listen(4)
+        self.server = socket(AF_INET, SOCK_STREAM)
+        self.server.bind((self.host, self.port))
 
-    while True:
-        client, addr = sock.accept()
-        print "[+] Connection with %s" % addr
+        connection_thread = threading.Thread(target=self.connect)
+        connection_thread.setDaemon(True)
+        connection_thread.start()
 
-        t = threading.Thread(target=client_handler, args=(client,))
-        t.start()
+        connection_thread.join()
 
-    sock.close()
+    def connect(self):
+        self.server.listen(10)
+        print("[+] Listening on port {}".format(self.port))
 
-if __name__ == '__main__':
-    main('localhost', 8000)
+        while True:
+            client, _ = self.server.accept()
+            #print "[+] Connection successful from " + address 
+            
+            client_thread = threading.Thread(target=self.start, args=(client,))
+            client_thread.start()
+
+    def start(self, client):
+        while True:
+            data = client.recv(4096)
+            if not data:
+                break
+
+            data_list = data.decode().split(' ')
+
+            self.on_arm[int(data_list[0])] = int(data_list[1])
+            self.rssi[int(data_list[0])] = int(data_list[2])
+
+            print(self.on_arm) 
+            print(self.rssi)
+
+    def close(self):
+        self.server.close()
