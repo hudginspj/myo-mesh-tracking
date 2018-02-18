@@ -12,9 +12,10 @@ app = Flask(__name__)
 
 
 #domain = "env-66916.customer.cloud.microstrategy.com:2443"
-domain = "env-72355.customer.cloud.microstrategy.com:2443"
-clientId = "13"
-orgId = "Paul"
+#domain = "env-72355.customer.cloud.microstrategy.com:2443"
+domain = "env-84684.customer.cloud.microstrategy.com:2443"
+clientId = "14"
+orgId = "5"
 session = requests.session()
 
 mesh_server = TCPServer.TCPServer('localhost', 8000)
