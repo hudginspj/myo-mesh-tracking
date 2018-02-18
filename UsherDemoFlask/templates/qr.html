@@ -111,7 +111,7 @@
 	// Replace the QR Code with a refresh prompt
 	function removeQrCode()
 	{
-		$('#qr-image').attr('src', "{{ url_for('static', filename='img/image_refresh.png') }");
+		$('#qr-image').attr('src', "{{ url_for('static', filename='img/image_refresh.png') }}");
 		$('#qr-image').css('cursor', 'pointer');
 		$('#qr-image').bind('click', refreshQrCode);
 	}

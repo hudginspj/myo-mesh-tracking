@@ -8,6 +8,9 @@
 <!--<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script>-->
 
 <!-- Style sheet -->
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" media="screen" />
 
 
@@ -17,7 +20,33 @@
 	<div id="main">
 		<h1>Welcome to the Usher REST API Sample!</h1>
 
-		<p class="index-link"><a href="qr">Scan QR Code</a></p>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<form class="form-horizontal" action='' method="POST">
+					  <fieldset>
+						<div id="legend">
+						  <legend class="">Login</legend>
+						</div>
+						<div class="control-group">
+						  <!-- Username -->
+						  <div class="controls" style="display:inline">
+							<p>Username</p><input type="text" id="username" name="username" placeholder="username" class="input-xlarge">
+						  </div>
+						</div>
+						<div class="control-group">
+						  <!-- Password-->
+						  <div class="controls" style="display:inline">
+							<p>Password</p><input type="password" id="password" name="password" placeholder="password" class="input-xlarge">
+						  </div>
+						</div>
+					  </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+		<p class="index-link" link="white"><a href="qr">Login</a></p>
 
 		<div id="footer">
 			<img src="{{ url_for('static', filename='img/usher_by_microstrategy.png') }}" />

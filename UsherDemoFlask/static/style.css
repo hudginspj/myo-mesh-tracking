@@ -10,12 +10,6 @@
 		font-size: 24px;
 	}
 	
-	a
-	{
-		color: #6CF;
-		font-size: 18px;
-	}
-	
 	body
 	{
 		background-color: #FFF;
@@ -47,26 +41,6 @@
 		background-color: aquamarine;
 	}
 
-	offline 
-	{
-		background-color: red;
-	}
-
-	removed
-	{
-		background-color: red;
-	}
-	
-	out 
-	{
-		background-color: yellow;
-	}
-
-	good 
-	{
-		background-color: aquamarine;
-	}
-
 	img
 	{
 		max-height: 100%;
@@ -75,14 +49,19 @@
 	
 	#main
 	{
-		display: inline-block;
+		width: auto;
+		justify-content: center;
+		text-align: center;
+		align-items: center;
 	}
 	
 	#footer
 	{
 		height: 50px;
 		padding-top: 20px;
-		text-align: right;
+		padding-bottom: 50px;
+		text-align: center;
+		filter: invert(100%);
 	}
 	
 	/*
@@ -91,7 +70,16 @@
 	
 	.index-link
 	{
-		margin: 10px 0;
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
 	}
 	
 	/*
@@ -191,6 +179,11 @@
 	.badge-text
 	{
 		padding-left: 10px;
-		text-align: left;
+		text-align: center;
+	}
+
+	.span12
+	{
+		justify-content: "center";
 	}
 }
