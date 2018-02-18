@@ -37,7 +37,6 @@ class TCPServer(object):
 
         self.server.listen(10)
 
-
         while True:
             client, address = self.server.accept()
             print("[+] Connection successful from {0}".format(address)) 
