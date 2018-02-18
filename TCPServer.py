@@ -1,9 +1,9 @@
 
 import threading
-import random
 from socket import socket, AF_INET, SOCK_STREAM
 import time
 from tracking.Tracker import *
+
 
 class TCPServer(object):
 
@@ -59,6 +59,9 @@ class TCPServer(object):
             alarm = self.tracker.respond_to_pi(node, status, rssi)
             # Sends an alert randomly for now
             client.send(str(alarm).encode())
+
+        client.close()
+
 
     def close(self):
         self.server.close()

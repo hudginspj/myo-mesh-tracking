@@ -1,7 +1,5 @@
-from piclient.TCPClient import TCPNode
+from TCPClient import TCPNode
 import time
-from tracking.Tracker import *
-
 
 
 def vibrate():
@@ -17,13 +15,14 @@ def main():
     node2.connect('localhost', 8000)
 
     while True:
-        node0.send(STAT_OFF, 50)
+
+        node0.send(0, 50)
         time.sleep(1)
 
-        node1.send(STAT_OFF, 50)
+        node1.send(0, 50)
         time.sleep(1)
 
-        node2.send(STAT_GOOD, -20.5)
+        node2.send(2, -20.5)
         time.sleep(1)
 
 
