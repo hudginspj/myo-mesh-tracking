@@ -159,7 +159,7 @@
 
 <body>
 	<!-- Sidebar -->
-	<div id="wrapper">
+	<div id="wrapper" class="toggled">
 			<div id="sidebar-wrapper">
 			   <ul class="sidebar-nav">
 					   <li class="sidebar-brand">
@@ -215,13 +215,7 @@
 			<img src="{{ url_for('static', filename='img/usher_by_microstrategy.png') }}" />
 		</div>
 	</div>
-		<!-- Menu Toggle Script -->
-	<script>
-		$("#menu-toggle").click(function(e) {
-			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-		});
-	</script>
+
 </body>
 
 </html>

@@ -20,7 +20,7 @@
 
 <body>
 	 <!-- Sidebar -->
-	 <div id="wrapper">
+	 <div id="wrapper" class="toggled">
 	 <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -92,13 +92,6 @@
 	<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-	<!-- Menu Toggle Script -->
-	<script>
-		$("#menu-toggle").click(function(e) {
-			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-		});
-	</script>
 </body>
 
 </html>
