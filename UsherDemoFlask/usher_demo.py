@@ -18,7 +18,7 @@ clientId = "14"
 orgId = "5"
 session = requests.session()
 
-mesh_server = TCPServer.TCPServer('localhost', 8000)
+mesh_server = TCPServer.TCPServer('0.0.0.0', 8000)
 
 
 @app.route('/updateMesh')
@@ -112,4 +112,4 @@ def getBadgeImage():
 
 
 
-
+# app.run(host='172.29.61.75')

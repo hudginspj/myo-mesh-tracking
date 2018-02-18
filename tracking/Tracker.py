@@ -30,6 +30,8 @@ class Tracker(object):
             if (now > self.timeouts[i]):
                 self.distances[i] = None
                 self.node_statuses[i] = STAT_OFF
+                self.compute_status_and_sector()
+        print("Chk tmt: now/stat/sec/dis", now, self.status, self.sector, self.distances)
 
 
     def respond_to_pi(self, node, status, rssi):

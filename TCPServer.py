@@ -7,7 +7,7 @@ from tracking.Tracker import *
 
 class TCPServer(object):
 
-    def __init__(self, host='localhost', port=8000):
+    def __init__(self, host='0.0.0.0', port=8000):
 
         print("[+] Initializing Communication")
 
