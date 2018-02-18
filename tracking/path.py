@@ -1,5 +1,5 @@
 from tracking.sectors import *
-path = [0, 1, 2]
+path = [0, 1, 4]
 
 
 def select_node_sectors(node_secs, path):
