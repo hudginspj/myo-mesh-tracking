@@ -67,6 +67,8 @@ class TCPServer(object):
             status = int(data_list[1])
             rssi = float(data_list[2])
 
+            print(node, status, rssi)
+
             alarm = self.tracker.respond_to_pi(node, status, rssi)
             # Sends an alert randomly for now
             client.send(str(alarm).encode())
