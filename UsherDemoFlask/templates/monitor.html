@@ -30,31 +30,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <script>        
-                            function changeColor(status){
-                                let row = document.getElementById("one");
-
-                                if (status == "good") {
-                                    row.style.backgroundColor = "aquamarine";
-                                } else if (status == "offline") {
-                                    row.style.backgroundColor = "yellow";
-                                } else if (status == "removed") {
-                                    row.style.backgroundColor = "red";
-                                } else if (status == "offline") {
-                                    row.style.backgroundColor = "red";
-                                } else {
-                                    row.style.backgroundColor = "grey";
-                                }
-                            }
-                        </script>
                     <tr id="one">
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>Google</td>
                     <td>Lunch Room</td>
-                    <td id="here" onchange="changeColor()"></td>
-                    <td id="there" onchange="changeColor()"></td>
+                    <td id="here"></td>
+                    <td id="there"></td>
                     </tr>
                     <tr id="two" bgcolor="green">
                     <th scope="row">2</th>
@@ -85,47 +68,61 @@
                     </tr>
                 </tbody>
             </table>
-	</div>
+    </div>
+    <script type="text/javascript">
+        //console.log('hello');
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function loop() {
+            var count = 0;
+            while (1){
+                //console.log(count);
+                //count++;
+                getUpdate()
+                await sleep(2000);
+            }
+        }
+
+        function changeColor(status) {
+            if (status == "good") {
+                document.getElementById("one").style.backgroundColor = "aquamarine";
+            } else if (status == "offline") {
+                document.getElementById("one").style.backgroundColor = "yellow";
+            } else if (status == "removed") {
+                document.getElementById("one").style.backgroundColor = "red";
+            } else if (status == "offline") {
+                document.getElementById("one").style.backgroundColor = "red";
+            } else {
+                document.getElementById("one").style.backgroundColor = "grey";
+            }
+        }
+    
+        function getUpdate() {
+            //console.log("getUpdate...")
+            $.ajax(
+            {
+                url: "/updateMesh",
+                dataType: "json"
+            })
+            .done(function(data)
+            {
+                changeColor(data['status'])
+                doUpdate(data['sector'], data['status']);
+    
+            })
+        }
+    
+        function doUpdate(sector, status) {
+            let element0 = document.getElementById("here");
+            element0.innerHTML = status;
+            let element1 = document.getElementById("there");
+            element1.innerHTML = sector;
+    
+        }
+    
+        loop();
+    </script>
 </body>
-
-<script type="text/javascript">
-	//console.log('hello');
-	function sleep(ms) {
-	  return new Promise(resolve => setTimeout(resolve, ms));
-	}
-	async function loop() {
-		var count = 0;
-		while (1){
-			//console.log(count);
-			//count++;
-			getUpdate()
-			await sleep(2000);
-		}
-	}
-
-	function getUpdate() {
-		//console.log("getUpdate...")
-		$.ajax(
-		{
-			url: "/updateMesh",
-			dataType: "json"
-		})
-		.done(function(data)
-		{
-			doUpdate(data['sector'], data['status'])
-
-		})
-	}
-
-	function doUpdate(sector, status) {
-        let element0 = document.getElementById("here");
-        element0.innerHTML = status;
-        let element1 = document.getElementById("there");
-        element1.innerHTML = String(sector);
-
-	}
-
-	loop();
-</script>
 
 </html>
