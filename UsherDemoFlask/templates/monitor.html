@@ -18,7 +18,7 @@
 
 <body>
     <!-- Sidebar -->
-	 <div id="wrapper">
+	 <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
                <ul class="sidebar-nav">
                        <li class="sidebar-brand">
@@ -52,8 +52,8 @@
            </div>
            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle" style="color:white"><img src="{{ url_for('static', filename='img/hamburger_icon.svg.png') }}"  height="30" width="30" /></a>
 	<div id="main">
-		<h1>Security monitoring screen</h1>
-        <table>
+		<h1>Active Guests</h1>
+        <table cellspacing="10" cellpadding="10">
                 <thead>
                     <tr>
                     <th>#</th>
@@ -73,7 +73,7 @@
                     <td>Google</td>
                     <td>Lunch Room</td>
                     <td id="here"></td>
-                    <td id="there"></td>
+                    <td id="there" style="font-weight: bold"></td>
                     </tr>
                     <tr id="two" bgcolor="green">
                     <th scope="row">2</th>
@@ -82,7 +82,7 @@
                     <td>QualComm</td>
                     <td>2nd floor Computer Lab</td>
                     <td>good</td>
-                    <td>2</td>
+                    <td><b>2</b></td>
                     </tr>
                     <tr id="three" bgcolor="green">
                     <th scope="row">3</th>
@@ -91,7 +91,7 @@
                     <td>Usher</td>
                     <td>1st floor Conference Room</td>
                     <td>good</td>
-                    <td>4</td>
+                    <td><b>4</b></td>
                     </tr>
                     <tr id="four" bgcolor="green">
                     <th scope="row">4</th>
@@ -100,7 +100,7 @@
                     <td>MicroSecurity</td>
                     <td>1st floor Bathroom</td>
                     <td>good</td>
-                    <td>1</td>
+                    <td><b>1</b></td>
                     </tr>
                 </tbody>
             </table>
@@ -158,13 +158,6 @@
         }
     
         loop();
-    </script>
-    	<!-- Menu Toggle Script -->
-	<script>
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
     </script>
 </body>
 
