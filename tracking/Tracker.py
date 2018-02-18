@@ -1,12 +1,14 @@
 import random
 from tracking.path import *
 from tracking.equations import *
-
+import time
 STATUSES = ['good', 'offline', 'removed', 'out']
 STAT_GOOD = 0
 STAT_OFF = 1
 STAT_REMOVED = 2
 STAT_OUT = 3
+
+TRACKER_TIMEOUT = 5
 
 class Tracker(object):
 
@@ -16,6 +18,18 @@ class Tracker(object):
         self.distances = [None, None, None, None, None]
         self.status = 1
         self.sector = -1
+        self.timeouts = []
+
+        timeout = time.time() + 3600
+        for i in range(5):
+            self.timeouts.append(timeout)
+
+    def check_timeouts(self):
+        now = time.time()
+        for i in range(5):
+            if (now > self.timeouts[i]):
+                self.distances[i] = None
+                self.node_statuses[i] = STAT_OFF
 
 
     def respond_to_pi(self, node, status, rssi):
@@ -25,6 +39,8 @@ class Tracker(object):
         if status in [STAT_GOOD, STAT_REMOVED]:
             self.rssis[node] = rssi
             self.distances[node] = distance(node, rssi)
+            self.timeouts[node] = time.time() + TRACKER_TIMEOUT
+            print("New timeout", node, self.timeouts[node])
         else:
             self.rssis[node] = 10000
             self.distances[node] = None
@@ -42,6 +58,7 @@ class Tracker(object):
 
 
     def compute_status_and_sector(self):
+
         if STAT_REMOVED in self.node_statuses:
             self.status = STAT_REMOVED
             return

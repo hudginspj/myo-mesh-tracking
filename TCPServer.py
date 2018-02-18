@@ -23,6 +23,9 @@ class TCPServer(object):
         self.connection_thread = threading.Thread(target=self.connect)
         self.connection_thread.start()
 
+        self.to_loop = threading.Thread(target=self.timeout_loop)
+        self.to_loop.start()
+
         # self.connection_thread.join()
 
     def connect(self):
@@ -42,6 +45,14 @@ class TCPServer(object):
             client_thread = threading.Thread(target=self.start, args=(client,))
             client_thread.start()
 
+
+
+    def timeout_loop(self):
+        while True:
+            self.tracker.check_timeouts()
+            time.sleep(1)
+
+
     def start(self, client):
         while True:
             data = client.recv(4096)
@@ -55,6 +66,8 @@ class TCPServer(object):
             node = int(data_list[0])
             status = int(data_list[1])
             rssi = float(data_list[2])
+
+            print(node, status, rssi)
 
             alarm = self.tracker.respond_to_pi(node, status, rssi)
             # Sends an alert randomly for now
