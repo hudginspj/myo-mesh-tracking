@@ -11,12 +11,49 @@
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" media="screen" />
 
+<!-- Bootstrap core CSS -->
+<link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
+	 <!-- Sidebar -->
+	 <div id="wrapper">
+	 <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index" style="color:white">
+                        Usher Security
+                    </a>
+                </li>
+                <li>
+                    <a href="index" style="color:white">Dashboard</a>
+                </li>
+                <li>
+                    <a href="index" style="color:white">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="index" style="color:white">Overview</a>
+                </li>
+                <li>
+                    <a href="index" style="color:white">Events</a>
+                </li>
+                <li>
+                    <a href="index" style="color:white">About</a>
+                </li>
+                <li>
+                    <a href="index" style="color:white">Services</a>
+                </li>
+                <li>
+                    <a href="index" style="color:white">Contact</a>
+                </li>
+		</ul>
+	</div>
+	</div>
+		
+	<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle" style="color:white">Menu</a>
 	<div id="main">
 		<h1>Welcome to the Usher REST API Sample!</h1>
 
@@ -31,13 +68,13 @@
 						<div class="control-group">
 						  <!-- Username -->
 						  <div class="controls" style="display:inline">
-							<p>Username</p><input type="text" id="username" name="username" placeholder="username" class="input-xlarge">
+							<p>username</p><input type="text" id="username" name="username" placeholder="" class="input-xlarge" height="30">
 						  </div>
 						</div>
 						<div class="control-group">
 						  <!-- Password-->
 						  <div class="controls" style="display:inline">
-							<p>Password</p><input type="password" id="password" name="password" placeholder="password" class="input-xlarge">
+							<p>password</p><input type="password" id="password" name="password" placeholder="" class="input-xlarge" height="30">
 						  </div>
 						</div>
 					  </fieldset>
@@ -52,6 +89,16 @@
 			<img src="{{ url_for('static', filename='img/usher_by_microstrategy.png') }}" />
 		</div>
 	</div>
+	<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+	<!-- Menu Toggle Script -->
+	<script>
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
 </body>
 
 </html>
