@@ -1,0 +1,247 @@
+@media screen, projection
+{
+	/*
+	 * Universal definitions
+	 */
+	
+	*
+	{
+		color: #000;
+		font-size: 24px;
+	}
+	
+	body
+	{
+		background-color: #FFF;
+		font-family: Helvetica, Arial, sans-serif;
+		padding: 0;
+	}
+	
+	h1
+	{
+		font-size: 30px;
+		margin: 20px 0;
+	}
+
+	table 
+	{
+		padding-left: 25px;
+		padding-right: 25px;
+	}
+
+	td 
+	{
+		padding-left: 25px;
+		padding-right: 25px;
+		text-align: center;
+	}
+
+	#two, #three, #four 
+	{
+		background-color: aquamarine;
+	}
+
+	img
+	{
+		max-height: 100%;
+		max-width: 100%;
+	}
+	
+	#main
+	{
+		width: auto;
+		justify-content: center;
+		text-align: center;
+		align-items: center;
+	}
+	
+	#footer
+	{
+		height: 50px;
+		padding-top: 20px;
+		padding-bottom: 50px;
+		text-align: center;
+		filter: invert(100%);
+	}
+	
+	/*
+	 * Index page definitions
+	 */
+	
+	.index-link
+	{
+		background-color: #BBB;
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+	
+	/*
+	 * Usher Code page definitions
+	 */
+	
+	#code-field
+	{
+		background-color: #FFF;
+	    border: 2px solid #FFF;
+	    color: #FFF;
+	    font-size: 32px;
+	    line-height: 65px;
+		text-align: center;
+		width: 200px;
+	}
+	
+	#keypad-container
+	{
+		padding: 20px 0;
+	}
+	
+	#keypad
+	{
+		border-collapse: collapse;
+		border-spacing: 0;
+		table-layout: fixed;
+		width: 300px;
+	}
+	
+	.btn, .key
+	{
+		border: 1px solid #FFF;
+		color: #000;
+		font-size: 22px;
+		line-height: 45px;
+		text-align: center;
+	}
+	
+	.btn
+	{
+		background-color: #FFF;
+	}
+	
+	.key
+	{
+		background-color: #FFF;
+	}
+	
+	/*
+	 * QR Code page definitions
+	 */
+	
+	#qr-container
+	{
+		padding-bottom: 20px;
+	}
+	
+	/*
+	 * Usher Code & QR Code page definitions
+	 */
+	
+	#msg-container
+	{
+		padding: 20px 0;
+	}
+	
+	#out-container
+	{
+		padding: 20px 0;
+	}
+	
+	#in-container, #out-container
+	{
+		min-width: 300px;
+	}
+	
+	#photo-container
+	{
+		height: 250px;
+		padding-bottom: 10px;
+		width: 250px;
+	}
+	
+	#user-name
+	{
+		font-size: 24px;
+		line-height: 45px;
+	}
+	
+	#user-title, #network-name
+	{
+		font-size: 16px;
+		line-height: 33px;
+	}
+	
+	.badge-text
+	{
+		padding-left: 10px;
+		text-align: center;
+	}
+
+	.span12
+	{
+		justify-content: "center";
+	}
+
+	/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+
+body {
+	overflow-x: hidden;
+  }
+  
+  #wrapper {
+	padding-left: 0;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+  }
+  
+  #wrapper.toggled {
+	padding-left: 250px;
+  }
+  
+  #sidebar-wrapper {
+	z-index: 1000;
+	position: fixed;
+	left: 250px;
+	width: 0;
+	height: 100%;
+	margin-left: -250px;
+	overflow-y: auto;
+	background: #000;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+	width: 250px;
+  }
+  
+  #page-content-wrapper {
+	width: 100%;
+	position: absolute;
+	padding: 15px;
+  }
+  
+  #wrapper.toggled #page-content-wrapper {
+	position: absolute;
+	margin-right: -250px;
+  }
+	
+  #menu-toggle
+  {
+	  justify-content: left;
+	  border: none;
+  } 
+}
